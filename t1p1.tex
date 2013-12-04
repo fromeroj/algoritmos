@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{ amssymb }
+\usepackage{color}
+
+\title{Estructura de datos y teoría de algoritmos\\
+Tarea 1 }
+\begin{document}
+\lstset{language=python}
+\maketitle
+
+\section{Tarea 1 Problema1}
+\begin{itemize}
+  \item[\bf{Pregunta 1}] Demuestra que todo torneo $T$ tiene un rey y un súbdito. Es decir, un vértice desde el cual se puede llegar a todos los demás vértices pasando a lo más por dos arcos, y uno al cual todos pueden llegar pasando a lo más por dos arcos
+
+  \item[Demostración:]
+    Sea $T=(V,E)$ un torneo y $ v \in V $ tal que $|out(v)| \ge |out(u)| \forall u\in V $ es decir la cardinalidad de la exvecindad de $v$ es máxima en $T$\\
+    denotaremos $x \rightarrow  y, si (x,y)\in E$\\
+    Afirmación:\\
+    $v$ es un rey en $T$\\
+    Es decir $$\forall u\ne v \in V ,  (v\rightarrow u) \vee (\exists u_v \in V  |  (v \rightarrow u_v) \wedge (u_v \rightarrow u))$$
+    Demostración por reducción al absurdo:\\
+    Supongamos que no es cierto, es decir:
+    $$\exists u\ne v \in V ,  (u \rightarrow v) \wedge (\forall u_v \in V  ,  (v \rightarrow u_v)  \Rightarrow (u \rightarrow u_v)  ).$$
+
+  \item[Existencia del súbdito:]
+    Para demostrar que cada torneo es un súbdito, basta notar que un rey en un torneo $G$ es un súbdito en el torneo $\widehat G$ que se obtiene cambiando la orientación de cada arista en $G$, así, por su significado simétrico, como cada torneo tiene un rey, cada torneo tiene un súbdito.\\
+
+\end{itemize}
+\end{document}
