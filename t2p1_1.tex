@@ -1,0 +1,87 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 2} }
+      \author{Compilado de respuestas}
+\begin{document}
+    \maketitle  
+      \newtheorem{teo}{Teorema}[section]    
+%****************Formato de las secciones
+\titleformat{\subsection}[frame]
+{\normalfont}{\filright\Large
+\ Problema \thesubsection \ }
+{6pt}{\bfseries\filright}
+%*****************************************
+
+
+\section{Teorema de Landau}
+    
+  \subsection{Demuestre en detalle que si una secuencia es de puntajes de un torneo, entonces satisface la condici\'on.}
+  
+  
+  Se demostrar\'a por inducci\'on sobre el tama\~no de la secuencia.\\
+\begin{itemize}
+	\item CASO BASE: \\
+	Para un torneo de tama\~no 2 se tiene la unica secuencia $(0,1)$ que cumple con el teorema.\\
+	Para un torneo de tama\~no n=3 se tienen las secuencias $(0,1,2)$ y $(1,1,1)$, las cuales cumplen la condici\'on. \\
+	\item HIP\'OTESIS: \\ Si $s(s_1 \leq s_2 \leq ... \leq s_n)$ es una secuencia de tama\~no $n$ correspondiente a un torneo, se cumple que: $\displaystyle\sum_{i=1}^k s_i \geq {k \choose 2}$ e igual para $k=n$ 
+	\item P.D. para una secuencia de tama\~no n+1 \\
+	A partir de un torneo de tama\~no $n$ construimos unmo de tama\~no $n+1$ a\~nadiendo un elemento que se relacionar\'a con los $n$ elementos iniciales, resultando entonces que el torneo de tama\~no $n$ es un subtorneo del que se acaba de contruir (tama\~no $n+1$), cuya secuencia se contruye de la siguiente manera:\\
+	Suponemos que hay $r$ elementos del subtorneo de tama\~no $n$ cuya arista llega hacia el nuevo elemento agregado, donde $0 \leq r \leq n$ (seria cero si no hay ninguna arista hacia el nuevo elemento  $y$ n si todas las aristas mencionadas llegan al nuevo). Esto hace que dichos elementos incrementen en uno su marcador, por lo tanto, la nueva secuencia de marcadores para el subtorneo de tama\~no $n$ es:
+	 $\displaystyle\sum_{i=1}^n {s_i} + r$ \\
+	 y el marcador del nuevo elemento es $n-r$.
+	 Como se puede observar, ahora la secuencia  $s(s_1 \leq s_2 \leq ... \leq s_n)$ para el torneo de taman\~no $n+1$ es mayor (cuando $r>0$) o igual (cuando $r=0$) a ${n \choose 2}$ por la hip\'otesis.
+	 Ahora,   $\displaystyle\sum_{i=1}^{n+1} s_i = \displaystyle\sum_{i=1}^n {s_i} + r + n - r$, por lo tanto:
+	  \begin{eqnarray}
+	  \label{eqn:smasuno}
+	  \displaystyle\sum_{i=1}^{n+1} s_i &=& \displaystyle\sum_{i=1}^n {s_i} +  n
+	  \end{eqnarray}
+Pero:
+	  \begin{eqnarray}
+	  \displaystyle\sum_{i=1}^{n} s_i &\geq& {n \choose 2} \nonumber
+	  \end{eqnarray}
+Sumando $n$ de ambos lados:
+	  \begin{eqnarray}
+	  \displaystyle\sum_{i=1}^{n} s_i +n  &\geq& {n \choose 2} +n  \nonumber \\
+	  \displaystyle\sum_{i=1}^{n} s_i +n  &\geq& \displaystyle\frac{n(n-1)}{2} +n  \nonumber \\
+	  \displaystyle\sum_{i=1}^{n} s_i +n  &\geq& \displaystyle\frac{n(n-1+2)}{2} \nonumber \\
+	  \displaystyle\sum_{i=1}^{n} s_i +n  &\geq& \displaystyle\frac{n(n+1)}{2} \nonumber  \\
+	  \label{eqn:snueva}
+	  \displaystyle\sum_{i=1}^{n} s_i +n &\geq& {n+1 \choose 2} 
+	  \end{eqnarray}
+Sustituyendo \ref{eqn:snueva} en \ref{eqn:smasuno}:
+\begin{eqnarray}
+	  \displaystyle\sum_{i=1}^{n+1} s_i &\geq& {n+1 \choose 2} 
+	  \end{eqnarray}
+Que es nuestra hip\'otesis de inducci\'on. $\surd$
+	
+\end{itemize}  
+Observaciones: El ayudante comentó que era mas fácil quitar uno que añadirlo.
+
+Al finaL comenta que se demuestra la igualdad pero no queda muy clara la desigualdad.
+
+CALIFICACIÓN: 0.95
+
+
+
+
+\end{document}

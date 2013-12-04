@@ -1,0 +1,106 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 2} }
+      \author{Compilado de respuestas}
+\begin{document}
+    \maketitle  
+      \newtheorem{teo}{Teorema}[section]    
+%****************Formato de las secciones
+\titleformat{\subsection}[frame]
+{\normalfont}{\filright\Large
+\ Problema \thesubsection \ }
+{6pt}{\bfseries\filright}
+%*****************************************
+
+
+\section*{Dijkstra}
+\subsection*{Demuestra porque el algoritmo de Dijsktra no funciona en gr\'aficas dirigidas con pesos negativos y da un ejemplo donde falla}
+
+Antes de hacer la demostración  se propone un ejemplo donde el algoritmo de Dijsktra no funciona en grafo dirigido con un arco de peso negativo:
+
+\begin{tikzpicture}
+\path[yshift=1.5cm,shape=circle]
+(0,1) node [style=draw, accepting](a1){A} (2,2) node [style=draw] (a2){B}
+(2,0)node [style=draw](a3){C};
+\draw[->] (a1) -- (a2) node [above,midway] {$5$};
+\draw[->] (a2) -- (a3) node [above,midway] {$-10$};
+\draw[->] (a3) -- (a1) node [above,midway] {$2$};
+
+\end{tikzpicture}
+
+Donde el vértice A es el origen.
+
+De acuerdo al algoritmo de Dijsktra:
+\begin{enumerate}
+\item Se toma el vértice A y se le asigna distancia a cumulada igual a cero y se marca como un nodo permanente.
+\item Se elige al siguiente de menort distancia que salga de A, es decir, al nodo ''C'' y se marca como permanente (cabe señalar que una vez marcado no se puede modificar su distancia, que en este caso es 2.
+\item La ruta final es ''A-C'' con p=2
+\end{enumerate}
+
+Sin embargo, la ruta elegida no es la correcta, ya que la ruta ''A-B-C'' tiene peso p=-5, por lo tanto el algoritmo no funcona para este tipo de gráficas.
+
+
+En general el algoritmo de Dijsktra va construyendo el camino mas corto conforme avanza a trav\'es de la gr\'afica, lo cual tiene dos implicaciones:
+\begin{enumerate}
+\item Cada vez que hace una iteraci\'on define el camino mas corto para cierta cantidad de nodos y no puede regresar por ese camino para cambiar algo.
+\item No puede predecir cuando una ruta tiene un tramo con un peso negativo, sobre todo si se encuentra despu\'es de un tramo con peso muy grande.
+\end{enumerate}
+Nota: Los puntos anteriores los cuestionó mucho el ayudante pero los incluyo porque en el problema se obtuvo 1 como calificación.  Bastará ser mas precisos en las definiciones.
+
+Para demostrar que el algoritmo de Dijsktra no funciona con pesos negativos, supongamos una gr\'afica de tama\~no $n$ donde tengo un camino:
+\begin{eqnarray}
+\label{eqn:caminox}
+S   \xrightarrow{x_0} v_1 \xrightarrow{x_1} \cdots \xrightarrow{x_{m-1}} v_m \xrightarrow{x_m} T 
+\end{eqnarray}
+ y otro 
+\begin{eqnarray}
+\label{eqn:caminoy}
+S \xrightarrow{y} u \xrightarrow{z} T 
+\end{eqnarray} 
+ Tal que
+\begin{itemize}
+\item   $\displaystyle\sum_{i=1}^{m} x_i < y$
+\item  $z<0$ 
+\item  $\displaystyle\sum_{i=1}^{m} x_i > y+z$ 
+\end{itemize}
+Lo cual quiere decir que  el camino \ref{eqn:caminoy}  es menor al \ref{eqn:caminox}.
+Sin embargo, al ejecutar el algoritmo, siempre se elegir\'an los $x_i$  y al final a $y$, por lo tanto, el camino trazado por el algoritmo ser\'a a trav\'es de las $x_i$ el cual no es el mas corto, llegando a una contradicci\'on.  Por lo tanto, el algoritmo de Dijsktra no funciona para pesos negativos. $\surd$ \\
+Ejemplo general:
+
+\begin{tikzpicture}
+%[every node/.style={draw}]
+
+\path[yshift=1.5cm,shape=circle]
+(0,1) node [style=draw](a1){S} (2,2) node [style=draw] (a2){$v_1$}
+(4,2) node [style=draw] (a3){$v_2$} (6,2) node [style=draw] (a4){$v_3$} (8,1)node [style=draw](a5){T} (4,0)node [style=draw](a6){u};
+\draw[->] (a1) -- (a2) node [above,midway] {$2$};
+\draw[->] (a2) -- (a3) node [above,midway] {$4$};
+\draw[->] (a3) -- (a4) node [above,midway] {$6$};
+\draw[->] (a4) -- (a5) node [above,midway] {$3$};
+\draw[->] (a1) -- (a6) node [above,midway] {$16$};
+\draw[->] (a6) -- (a5) node [above,midway] {$-10$};
+% -- (a4) -- (a5) -- (a6) --  -- (a1);
+\end{tikzpicture}
+
+
+\end{document}
