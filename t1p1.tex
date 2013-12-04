@@ -8,9 +8,9 @@
 Tarea 1 }
 \begin{document}
 \lstset{language=python}
-\maketitle
+%\maketitle
 
-\section{Tarea 1 Problema1}
+\section{Tarea 1}
 \begin{itemize}
   \item[\bf{Pregunta 1}] Demuestra que todo torneo $T$ tiene un rey y un súbdito. Es decir, un vértice desde el cual se puede llegar a todos los demás vértices pasando a lo más por dos arcos, y uno al cual todos pueden llegar pasando a lo más por dos arcos
 
@@ -23,9 +23,11 @@ Tarea 1 }
     Demostración por reducción al absurdo:\\
     Supongamos que no es cierto, es decir:
     $$\exists u\ne v \in V ,  (u \rightarrow v) \wedge (\forall u_v \in V  ,  (v \rightarrow u_v)  \Rightarrow (u \rightarrow u_v)  ).$$
+    
+    De ahi podemos decir que $v \in out(u)$ y que $out(v)  \subset out(u)$ por lo que $|out(u)|>|out(v)|$ Contradicción a la maximalidad de $v \blacksquare$
 
   \item[Existencia del súbdito:]
-    Para demostrar que cada torneo es un súbdito, basta notar que un rey en un torneo $G$ es un súbdito en el torneo $\widehat G$ que se obtiene cambiando la orientación de cada arista en $G$, así, por su significado simétrico, como cada torneo tiene un rey, cada torneo tiene un súbdito.\\
+    Para un Torneo $T$ considere el torneo $\widehat T$ que se obtiene cambiando la orientación de cada arista en $T$, así un rey en $T$ es súbdito en $\widehat T$ y viceversa, como hay un rey en $\widehat T$ hay un subdito en $T$.\\
 
 \end{itemize}
 \end{document}
