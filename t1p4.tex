@@ -1,0 +1,27 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{ amssymb }
+\usepackage{color}
+
+\begin{document}
+\lstset{language=python}
+\begin{itemize}
+
+\item[\bf{Pregunta 4}] Prueba que en un torneo aleatorio de n vértices, la probabilidad de que todo vértice sea un rey y un subdito tiende a 1 conforme n tiende a infinito.
+
+\item[Respuesta] 
+Sea $T=(V,E)$ un torneo con $|V|=n$.\\ 
+denotaremos $x \rightarrow  y, si (x,y)\in E$\\
+
+Sean $x_1,x_2 \in V$  diremos que $x_2$ resiste a $x_1 $ si:\\ $x_2 \rightarrow x_1$ y $\forall v \in V x_1 \rightarrow  v \Rightarrow v \rightarrow x_2$
+
+Calculemos la probabilidad $\psi(x_1,x_2)$ de que $x_2$ resista a $x_1$, dado que $p(x_1 \rightarrow x_2)=1/2$ y que para cada $u \in V$  $ p(v\rightarrow x_2 \vee x_1\rightarrow v )=1/4$ la probabilidad de que esto no pase es $3/4$, como es independiente para los $n-2$ vértices restantes la probabilidad es: $\psi(x_1,x_2)=(1/2)\times(3/4)^{n-2}$.\\
+Esto es la probabilidad $\psi(x_1,x_2)$ de que $x_2$ resista a $x_1$, para que en una gráfica no todo vértice sea rey, debe suceder que haya al menos un vértice que resista a otro, como esto puede pasar de $n\times(n-1)$ formas, ya que es importante el orden, se tiene que la probabilidad de que no todo vértice sea rey es a lo más:\\
+$n\times(n-1)\times(1/2)\times(3/4)^{n-2}$\\
+
+y $lim_{n\to\infty} n\times(n-1)\times(1/2)\times(3/4)^{n-2} = 0 \blacksquare$\\
+
+El caso de subdito, es demostrado dado la relación dual con ser súbdito.
+\end{itemize}
+\end{document}
