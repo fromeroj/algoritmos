@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{ amssymb }
+\usepackage{color}
+\begin{document}
+\lstset{language=python}
+
+\begin{itemize}
+\item[\bf{Pregunta 5}]Sean $T_{1}=(E_1,V)$ y $T_{2}=(E_2,V)$ dos torneos sobre el mismo conjunto de vértices $V$. Demuestra la existencia de un vértice desde el cual se puede llegar a todos los demás en un arco de $T_{1}$, o un arco de $T_{2}$ , o un arco de $T_{1}$ seguido de uno en $T_{2}$.
+
+Llamemos rey doble, a un vértice que cumple la condición descrita \\
+y para $u,v, u\neq v \in V$ denotaremos:\\
+ $u \rightarrow_1 v$ si $(u,v) \in E_1$\\
+ $u \rightarrow_2 v$ si $(u,v) \in E_2$\\
+ $u \Rightarrow v$ si  $ (u \rightarrow_1 v) \wedge (u \rightarrow_2 v) \wedge (\exists x \in V | u \rightarrow_1 x \wedge x \rightarrow_2 v )$\\
+
+\item[Inducción] Para el caso de los torneos de Tamaño 1, el único vértice es el rey, tanto en $T_1$ como en $T_2$.
+
+  Supongamos que es cierto que para todo torneo de tamaño $n$ existe un rey doble
+  Por demostrar, existe un rey noble en todo par de torneos sobre el mismo conjunto de n+1 vértices $V$.\\
+
+  sea $j$ un vértice cualquiera en $V$, en las gráfica inducida $V_{-j}$ por los 2 Torneos $T_1$ y $T_2$ al retirar $j$ por hipotesis de inducción hay un rey doble $r$ en $V_{-j}$.\\
+Caso 1: $r \rightarrow j $ en $T_1$ o en $T_2$  por lo tanto $r$ es un rey
+
+Caso 2: $j \rightarrow t $ tanto en $T_1$ como en $T_2$, considere $\delta_{T1}(r)$ que 
+es la exvecindad de $r$ en $T_1$, si $ \exists v \in V | v \rightarrow j  \in T_2 $ entonces $r$ es rey doble, en caso contrario  $j \rightarrow u $ en $T_2$ a todo 
+vértice en $\delta_{T_1}(r)$ pero como $j \rightarrow t $ en $T_1 $  y
+$ j \Rightarrow \delta_{T1}(r) $ luego $ j \Rightarrow \delta_{T_2}(r) $ puesto que 
+$j \rightarrow t $ en $T1$ y también $ j \Rightarrow \delta_{T_2}(\delta_{T_1}(r))$ 
+puesto que $j \rightarrow \delta_{T_1}(r) $ en $T_1$, pero por $r$ ser rey doble 
+$r \cup \delta_{T_1}(r) \cup \delta_{T_2}(r) \cup \delta_{T_2}(\delta_{T_1}(r)) = V_{-j}$ $j$ es rey doble en $V \blacksquare$
+
+\end{itemize}
+\end{document}

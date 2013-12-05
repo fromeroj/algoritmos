@@ -1,0 +1,23 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{ amssymb }
+\usepackage{color}
+\begin{document}
+\lstset{language=python}
+\begin{itemize}
+
+\item[\bf{Pregunta 7}] Adapta el algoritmo del emparejamiento estable para instancias de n hombres y m mujeres en donde n = m. El objetivo es encontrar un emparejamiento estable de cardinalidad máxima, con la definición original de emparejamiento estable (es decir, que no hay alguna pareja inestable). Demuestra que tu adaptación siempre termina y que da un emparejamiento estable de cardinalidad máxima posible.
+
+¿Cuál es el tiempo de ejecución del algoritmo en términos de n y m?
+¿Se puede caracterizar el tamaño del emparejamiento estable de máxima
+cardinalidad en términos de n y m?
+¿Tu adaptacién sigue optimizando individualmente a cada hombre (cada hombre termina con su mejor pareja válida)?
+
+\item[Respuesta] Adaptación: supongamos que $n > m$, lo que hacemos es crear $n-m$ mujeres ficticias de tal forma que cada hombre siempre prefiera a cualquier mujer real sobre cualquier mujer ficticia, en caso de $m > n$ creamos $m-n$ hobres ficticios, de tal forma que cada mujer prefiera a cualquier hombre real sobre cualquier hombre ficticio. en el caso $n = m$ es el visto en clase y alimentamos con estos datos el algoritmo $G-S$.
+\item[Tiempo de ejecución] Como lo ``reducimos'' al caso visto en clase cuya complejidad es de $\theta(n^2)$ añadiendo elementos ficticios para hacerlo cuadricular, la complejidad es de  $\theta(max(n,m)^2)$
+
+\item[Optimilidad] Sí, esto se debe a que si un hombre obtiene su mejor pareja válida (real o ficticia), en el caso de que sea ficticia, como el prefiere a cualquier mujer real sobre cualquier ficticia por construcción quiere decir que no habia pareja válida real para el y por lo tanto la mujer que recibe (i.e. ninguna) es la mejor pareja válida, en caso de que le toque pareja real, la conclusión se sigue de $G-S$ directamente.
+
+\end{itemize}
+\end{document}

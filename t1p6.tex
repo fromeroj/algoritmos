@@ -1,0 +1,37 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{ amssymb }
+\usepackage{color}
+\begin{document}
+\lstset{language=python}
+\begin{itemize}
+
+\item[\bf{Pregunta 6}]El algoritmo de BFS visto en clase utiliza una cola de vértices, y cada vértice tiene asignado un color (gris,blanco,negro), y un estimado de distancia d. El estimado d(v) siempre es mayor o igual a la distancia del origen a v, y al final del algoritmo, d(v) es igual a la distancia del origen a v. Presenta y demuestra las invariantes que satisfacen los vértices en la cola, con respecto a d y a su color.
+
+Por claridad cambiemos (gris,blanco,negro) por (encontrado,visitados y no visitado)
+\begin{lstlisting}[frame=single] 
+1 def BFS(G,v):
+2    create a queue Encontrados
+3    create a set Visitados
+4    create queue Ordenados
+5    enqueue v onto Encontrados
+6    while Encontrados is not empty:
+7        t <- Encontrados.dequeue()
+8        for all vertex u in G.adjacentEdges(t) do
+9             if u is not in Ordenados:
+10                if u is not in Encontrados:
+11                   enqueue u into Encontrados
+12            add u into Ordenados
+\end{lstlisting}
+
+\item[invariantes]
+  \begin{itemize}
+ \item En cada iteración de $(6)$ el conjunto Ordenados aumenta en uno su tamaño.\\
+   Lo cual es cierto pues $12$ es ejecutado incondicionalmente una vez cada que se pasa por $6$.
+   \item Cada elemento entra una unica vez y sale una unica vez de Encontrados.\\
+     Esto se debe a que $11$ es condicion de $9$ y de $10$, es decir, que se añade a Encontrados, si no esta en Encontrados o en Ordenados, es decir que se visita por primera vez, de ahi que solo entra una vez a Encontrados
+   \end{itemize}
+
+\end{itemize}
+\end{document}
