@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{ amssymb }
+\usepackage{color}
+\begin{document}
+\lstset{language=python}
+
+\begin{itemize}
+\item[\bf{Pregunta 2}] Presenta un algoritmo para encontrar un rey y analiza su complejidad y correctez.
+
+\item[Algoritmo]
+  El algoritmo es el sigiente:
+  Recorrase el torneo buscando el elemento que tiene exvecindad máxima.
+
+\begin{lstlisting}[frame=single] 
+  def busca_rey(T)
+  maximo = 0
+  rey = none
+  for {v in T.vertices}:
+     if len(v.adjacent) > maximo:
+       maximo = len(v.adjacent)
+       rey = v
+  return v
+\end{lstlisting}
+
+Este algoritmo busca exhaustivamente sobre los vértices, por lo que necesariamente encuentra aquel de máxima exvecindad.\\
+Asumiendo que la representación de $G$ es la  de adyacencia con listas ligadas, el algoritmo es del orden de $O(n + m)$, pues cada vértice se recorre una vez y ya en el y solo se toma el tamaño de la lista de adyacencia, lo cual es en el caso de una lista ligada $O(m)$.
+
+\end{itemize}
+\end{document}

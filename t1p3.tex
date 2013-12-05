@@ -1,0 +1,21 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{ amssymb }
+\usepackage{color}
+
+\begin{document}
+\lstset{language=python}
+\begin{itemize}
+\item[\bf{Pregunta 3}] Demuestra que todo torneo tiene un camino dirigido Hamiltoniano.
+\item[Por inducción:]
+  Sobre el número de vértices en el torneo, el caso base es el torneo de 1 vértice, el camino es el mismo vértice.\\
+  Supongamos que es cierto que todo torneo de tamaño $n$ tiene un camino Hamiltoniano.\\
+  Sea $T=(V,E)$ un torneo donde $|V|=n+1$\\
+  Considere $v \in V$ y el torneo $T_{-v}$ inducido al eliminar $v$ y las aristas incidentes a $v$ de $T$, sabemos por hipótesis de inducción que en $T_{-v}$ hay un camino Hamiltoniano.\\
+    Sea $H_{n}=(v_1,v_2,...,v_n)$ tal camino.
+      Si $v \rightarrow v_{1}$, $(v,v_1,v_2,...,v_n)$ es un camino Hamiltoniano en $T_{-v}$.\\
+      En caso contrario $v_1 \rightarrow v$, sea $v_i$ el primer elemento en $H_{n}$ tal que $v \rightarrow v_i$, ahi tenemos que $(v_1,...,v_{i-1},v,v_i,...,v_n)$ es un camino Hamiltoniano en $G$, pues sabemos que $j<i \Rightarrow v_{j} \rightarrow v$.
+      Y si no hay un primer elemento, es decir $\forall u \in H, u \rightarrow v$, entonces $(v_1,v_2,...,v_n,v)$ es un camino Hamiltoniano en $T \blacksquare$.\\
+\end{itemize}
+\end{document}

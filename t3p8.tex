@@ -1,0 +1,79 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 3} }
+      
+      \author{Compilación}
+      \numberwithin{equation}{section}
+\begin{document}
+    \maketitle  
+%****************Formato de las secciones
+\titleformat{\section}[frame]
+{\normalfont}{\filright\Large
+\ Problema \thesection \ }
+{6pt}{\bfseries\filright}
+%*****************************************
+\section*{Considera el siguiente algoritmo: La entrada es una gr\'afica no dirigida G con pesos en las  aristas.  Inicialmente, por cada v\'ertice $v$ en G se construye un \'rbol que consiste unicamente  de $v$. Mientras el n\'umero de arboles mantenidos en el algoritmo sea mayor a uno, toma un \'arbol T cualquiera y elige la arista de peso m\'inimo con un solo extremo en T, a\~nadiendola al bosque, y disminuyendo el n\'umero total de \'arboles mantenidos en el algoritmo en uno.}
+
+\subsection*{Demuestra que este algoritmo encuentra el \'arbol generador de peso m\'inimo (AGM) o presenta un contraejemplo.}
+
+Correctez:
+
+Observaciones
+\begin{enumerate}
+\item Si existe una arista entre dos árboles del bosque será la de menor peso que pueda unirlos.
+\item El grafo es conexo, lo cuál asegura que el algoritmo termina, ya que en cada iteración se reduce el número de árboles en 1.
+\end{enumerate}
+
+
+Para el algoritmo propuesto se tiene la siguiente invariante:
+
+"El bosque está compuesto por dos sub-grafos que son árboles generadores de peso mínimo". 
+
+Al principio es cierto ya que cada vértice es un subgráfico de G donde él mismo es su árbol generador de peso mínimo.
+
+En cada ejecución del ciclo mientras, se selecciona la arista de salida de peso menor de un árbol y se une con el resto, cumpliendo la propiedad de corte, la cual dice que la arista que una dos partes de un árbol generador mínimo debe ser la de menor peso (demostración en clase), por lo cuál la invariante se mantiene.
+
+Al final de la ejecución, hemos unido todos los árboles en uno, que es un árbol generador mínimo, manteniendo la invariante.
+
+
+\subsection*{En caso positivo, presenta una breve discusi\'on sobre las diferencias (si las hay) de este algoritmo comparado con el algoritmo de Prim y el de Kruskal.}
+
+Prim y Kruskal son casos particulares de este algoritmo
+
+\subsection*{Cuál es la complejidad de este algoritmo?}
+
+En este algoritmo se realizan dos operaciones principlamente:
+\begin{enumerate}
+\item La uni\'on de los sub\'arboles.  Haciendo esta operaci\'on con la estructura de datos union /find optimizada, para una gr\'afica de $n$  v\'ertices con $n-1$ uniones, la complejidad es O((2n-1)log* n)=O(nlog*n).
+\item La otra operaci\'on que realiza el algoritmo es la b\'usqueda del elemento mas peque\~no que el \'arbol pueda unir.  Esto es un poco mas complejo, ya que se deber\'an realizar en el peor caso $1 + 2 + 3 +...+n-1$ comparaciones, esto es $\frac{n(n-1)}{2}=O(n^2)$.
+
+Por lo tanto, el algoritmo es de orden $O(n^2).$
+
+
+
+\end{enumerate}
+
+
+
+
+\end{document} 	

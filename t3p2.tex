@@ -1,0 +1,90 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 3} }
+      
+      \author{Compilación}
+      \numberwithin{equation}{section}
+\begin{document}
+    \maketitle  
+%****************Formato de las secciones
+\titleformat{\section}[frame]
+{\normalfont}{\filright\Large
+\ Problema \thesection \ }
+{6pt}{\bfseries\filright}
+%*****************************************
+
+\section*{Prop\'on un algoritmo de ordenamiento que haga uso de una cola de prioridades. Explica en detalle su complejidad y correctez.}
+
+El algoritmo que a continuaci\'on se presenta supone que se tiene una cola de prioridades Q implementada eficientemente como un heap y que dicha cola siempre tiene al inicio el n\'umero mas peque\~no.
+Tambi\'en supongo por sencillez que los elementos del arreglo L son distintos, aunque el algoritmo funciona si fueran iguales, pero facilita el an\'alisis.
+
+\begin{algorithm}[H]
+	\caption{Ordenamiento con cola de prioridades}
+	\begin{algorithmic}[1]
+	\State Q $\leftarrow \emptyset$
+	\State $L_o \leftarrow 0$
+	\For{j $\leftarrow 0$ upto length(L)}
+	\State	Q.insertWithPriority(L[j],L[j])  
+	\EndFor
+	\For{i $\leftarrow 0$ upto length(L)}
+	\State	$L_o[i] \leftarrow$ Q.removeMin()  
+	\EndFor	
+	\State	return $L_o$
+		
+	\end{algorithmic}
+\end{algorithm}
+\begin{enumerate}
+\item Correctez.
+
+Suponemos que la cola de prioridad funciona como está especificada.\\
+Observaciones: 
+\begin{enumerate}
+\item El for de las lineas 3-5 y 6-8 se ejecutan $|L|$ veces
+\item  En la fila 4 se ingresa cada número L en la cola de prioridad con su valor como prioridad.
+\end{enumerate}
+(Dice el ayudante que esto aún no es correctez, esta respuesta tiene 0.95)
+\item  Invariante: 
+En cada paso i del ciclo , los elementos $L_o[0]$ a $L_o[i]$ se encuentran ordenados.
+
+Demostración:
+
+Al inicio de la ejecución esto es trivialmente cierto ya que el arreglo está vacío.
+
+En cada iteración del ciclo de la línea 3 se asigna al arreglo de resultados el valor con menor prioridad dentro de la cola, en este caso, el elemento con valor menor (como aparece en la observación b).  Al eliminarse el elemento de la cola Q (linea 7) se garantiza que ningún elemento puede repetirse.
+
+Al final de la ejecución, en el arreglo $L_o$ quedan los elementos de Q sin repetir (solo una vez cada uno) en orden ascendente, ya que durante todo el ciclo siempre se asignó el valor mínimo de la cola de prioridad  de los elementos restantes.
+
+\item Complejidad
+
+Suponemos una implementación eficiente de la cola de prioridad Q y n como el número de 	elementos a ordenar.
+
+Ciclo 2-5: Se ejecuta n veces y la complejidad de insertWithPriority es O(log n) \\
+Ciclo 6-8: Se ejecuta n veces y la complejidad de removeMin es O(log n)
+
+Por lo tanto, la complejidad es O(nlog n).
+
+
+
+\end{enumerate}
+
+\end{document} 	

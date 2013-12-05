@@ -1,0 +1,71 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 2} }
+      \author{Compilado de respuestas}
+\begin{document}
+    \maketitle  
+      \newtheorem{teo}{Teorema}[section]    
+%****************Formato de las secciones
+\titleformat{\subsection}[frame]
+{\normalfont}{\filright\Large
+\ Problema \thesubsection \ }
+{6pt}{\bfseries\filright}
+%*****************************************
+
+
+\section*{Tema Ford}
+\subsection*{c. Demuestra porque en la versi\'on avanzada, la complejidad es de orden $n \times m$.}
+Algoritmo de Ford Avanzado
+
+\begin{algorithm}[H]
+	\caption{Algoritmo de Ford Avanzado}
+	\begin{algorithmic}[1]
+	\For{ every $v \in V$}
+	\State $\lambda(v) \leftarrow \infty$
+	\EndFor
+	\State $\lambda(s) \leftarrow 0$
+	\Repeat
+	\State Flag $\leftarrow $ false
+	\For{every $1 \leq i \leq m$}
+	\State let $u \leftarrow v$
+	\If{$\lambda(v)$ is finite and $\lambda(v)>\lambda(u) + l(ei)$}
+	\State  $\lambda(v) \leftarrow \lambda(u)+l(ei)$
+	\State Flag $\leftarrow$ True
+	\EndIf
+	\EndFor
+	\Until Flag=False
+	
+	\end{algorithmic}
+\end{algorithm}
+
+Si el grafo no tiene ciclos negativos, el algoritmo avanzado de Ford termina en O(m,n).
+
+Demostración: 
+Si v es accesible desde s y ya que no hay ciclos negativos accesibles, una ruta mínima de s a v es simple y consta de n-1 aristas menos.
+Por lo que durante la n-ésima aplicación del loop (lineas 7-13) ningún vértice mejora su valor y el procedimiento termina ya que la complejidad del loop (lineas 7-13) es O(m), el procedimiento completo toma O(m+n) tiempo.
+
+
+  
+  
+
+\end{document}
