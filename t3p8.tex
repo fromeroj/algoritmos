@@ -36,6 +36,15 @@
 
 \subsection*{Demuestra que este algoritmo encuentra el \'arbol generador de peso m\'inimo (AGM) o presenta un contraejemplo.}
 
+Correctez:
+
+Observaciones
+\begin{enumerate}
+\item Si existe una arista entre dos árboles del bosque será la de menor peso que pueda unirlos.
+\item El grafo es conexo, lo cuál asegura que el algoritmo termina, ya que en cada iteración se reduce el número de árboles en 1.
+\end{enumerate}
+
+
 Para el algoritmo propuesto se tiene la siguiente invariante:
 
 "El bosque está compuesto por dos sub-grafos que son árboles generadores de peso mínimo". 
@@ -51,7 +60,7 @@ Al final de la ejecución, hemos unido todos los árboles en uno, que es un árb
 
 Prim y Kruskal son casos particulares de este algoritmo
 
-\subsection*{Cu\'al es la complejidad de este algoritmo?}
+\subsection*{Cuál es la complejidad de este algoritmo?}
 
 En este algoritmo se realizan dos operaciones principlamente:
 \begin{enumerate}
