@@ -1,31 +1,31 @@
 \documentclass[9pt,spanish]{article}
-      \usepackage[spanish,activeacute]{babel}
-      \usepackage{anysize}
-        %para tamaño carta, para otros eligieran la correcta
-	  \papersize{27.9cm}{21.5cm} 
-		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
-	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
-	  \usepackage[utf8]{inputenc}
-      \usepackage{enumerate}
-      \usepackage{algpseudocode}
-      \usepackage{algorithm}
-	  %\usepackage{algorithmic}
-	  \usepackage{amsmath}
-	  \usepackage{titlesec}
-      \usepackage{dsfont}
-       \usepackage{tikz}
-	  \usetikzlibrary{automata,positioning}
-	  \usepackage[matrix,arrow]{xy}
-	  \usetikzlibrary{intersections}
-	  \usepackage{tcolorbox}
-      \parindent 0em
-      \parskip 1ex
-      \title{Algoritmos\\ \large{TAREA 3} }
-      
-      \author{Compilación}
-      \numberwithin{equation}{section}
+%\usepackage[spanish,activeacute]{babel}
+%\usepackage{anysize}
+%para tamaño carta, para otros eligieran la correcta
+%\papersize{27.9cm}{21.5cm} 
+%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+%\marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+%\usepackage{algpseudocode}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{titlesec}
+%\usepackage{dsfont}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage[matrix,arrow]{xy}
+\usetikzlibrary{intersections}
+\usepackage{tcolorbox}
+\parindent 0em
+\parskip 1ex
+\title{Algoritmos\\ \large{TAREA 3} }
+
+\author{Compilación}
+\numberwithin{equation}{section}
 \begin{document}
-    \maketitle  
+%    \maketitle  
 %****************Formato de las secciones
 \titleformat{\section}[frame]
 {\normalfont}{\filright\Large
@@ -34,6 +34,9 @@
 %*****************************************
 
 \section*{Explica en detalle en que consiste el argumento de la prueba vista en clase para demostrar que el algoritmo de las minimas paradas para cargar gasolina es optimo.}
+
+El algoritmo visto en clase es el siguiente:
+Asumiendo que el carro puede andar $n$ km con el tanque lleno, se revisa cual es la gasolinera más lejana que esta a menos de $n$ km y se llena el tanque en esta gasolinería y se repite el proceso.
 
 Este argumento se llama argumento de intercambio y consiste en que dada la solución de un algoritmo greedy llámese “solución greedy, abreviado SG” se supone que hay otra solución dada por otro algoritmo y que es óptima llámese “solución óptima, abreviado SO”. Hay que asumir que la solución óptima y la solución greedy no son iguales por lo que:
 \begin{itemize}
@@ -45,7 +48,5 @@ Este argumento se llama argumento de intercambio y consiste en que dada la soluc
 Entonces la prueba se efectúa haciendo intercambios en los elementos de SO cuidando que no se empeore la calidad de la solución dada por la SO original y que con este intercambio la forma de SO se acerca más a la forma de SG de manera tal que si se repiten estos intercambios tantas veces como sea necesario terminamos sin diferencias entre SO y SG lo cual demuestra que ambos son óptimos.
 
 El corazón del argumento es suponer una solución óptima lo mas parecida posible a la solución greedy,pero al analizar las diferencias, se encuentra que el algoritmo greedy proporcionó una solución mejor a la óptima.
-
-
 
 \end{document} 	
