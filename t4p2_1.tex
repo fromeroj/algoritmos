@@ -1,0 +1,84 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 4} }
+      
+      \author{Israel Sandoval Grajeda y Fausto Salazar Mora}
+      \numberwithin{equation}{section}
+\begin{document}
+    \maketitle  
+%****************Formato de las secciones
+\titleformat{\section}[frame]
+{\normalfont}{\filright\Large
+\ Problema  }
+{6pt}{\bfseries\filright}
+%*****************************************
+
+
+\section*{Divide y vencer\'as}
+\subsection*{Cierre convexo}
+
+\begin{algorithm}[H]
+	\caption{Cierre convexo}
+	\begin{algorithmic}[1]
+	\State Odena(S,x)
+	\State cierreconvexo(S) //Regresa la secuencia de puntos del cierre convexo
+	\State n=longitud(S)	   
+	\If{len(L)$<$3}
+	\State	return S  //Caso base
+	\EndIf
+	\State I=cierreconvexo(S[0..n/2$\rfloor$])
+	\State D=cierreconvexo(S[n/2$\rfloor$+1..Tam(L)-1]) //
+	\State return UnionConvexa(I,D) 
+	\end{algorithmic}
+\end{algorithm}
+
+Ahora se presenta la funcion UnionConvexa()
+\begin{algorithm}[H]
+	\caption{Unión de las soluciones parciales del cierre convexo}
+	\begin{algorithmic}[1]
+	\State Union Convexa(LI,LD)
+	\State  Codigo...
+	\end{algorithmic}
+\end{algorithm}
+\begin{enumerate}
+\item Análisis de complejidad\\
+Tomando en cuenta lo que ya se reviso
+\begin{itemize}
+\item En el ordenamiento del inicio O(n log n) 1 sola vez
+\item En el caso base tengo tiempo constante O(1)
+\item En el caso recursivo la entrada se divide en 2 así que es 2 T(n/2).
+\item Falta análisis de Unión convexa pero se supone que debe ser   O(n) para que el algoritmo tenga complejidad O(nlog(n)).
+\item Por lo tanto el caso recursivo completo es T(n) = 2 T(n/2) + O(n)
+Aplicando el método maestro a= 2 b=2 y f(n) =O(n)
+Comparo f(n) con $n^{log_ba}$ puesto que $log_22 = 1$ tengo n = n que cae en el caso 2 del método maestro y T(n) = O(n log n). Finalmente tomando en cuenta también el ordenamiento O(n log n) + O (n log n) en total termino con O(n log n).
+\end{itemize}
+\item Análisis de correctez \\
+El predicado siguiente indica que es correcto:
+En cada llamada recursiva de la función el tamaño de la entrada disminuye a la mitad y al volver de la recursión siempre me regresa el cierre convexo de la entra que recibió.
+
+\end{enumerate}
+
+\newpage
+
+
+\end{document} 	

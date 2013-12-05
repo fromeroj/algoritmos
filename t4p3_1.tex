@@ -1,0 +1,115 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 4} }
+      
+      \author{Israel Sandoval Grajeda y Fausto Salazar Mora}
+      \numberwithin{equation}{section}
+\begin{document}
+    \maketitle  
+%****************Formato de las secciones
+\titleformat{\section}[frame]
+{\normalfont}{\filright\Large
+\ Problema  }
+{6pt}{\bfseries\filright}
+%*****************************************
+
+
+\section*{Problemas Programaci\'on din\'amica}
+\subsection*{Formas de dar cambio}
+
+Caso recursivo
+
+
+\begin{algorithm}[H]
+	\caption{Formas de dar cambio recursivo }
+	\begin{algorithmic}[1]
+	\State S = $\{1,5,10,25,50\}$ // los centavos
+	\State Cambio(x,S)
+	\State n = longitud(S)
+	\State Sm = S sin S[n-1]
+	\If{x=0} //Cambio exacto
+	\State return 1
+	\ElsIf{x$<$0}  // Me pasé de cambio
+	\State return 0
+	\ElsIf{n=0}	
+	\State return 0
+	\EndIf
+	\State
+	\Return Cambio(x-S[n-1],S) + Cambio(x,Sm)
+	\end{algorithmic}
+\end{algorithm}
+
+La recursión consiste en tomar las combinaciones posibles del conjunto que toma al menos una moneda de mayor denominación y el otro conjunto donde se descarta que la moneda de mayor denominación.
+Para la memoización considerar una matriz bidimensional donde los renglones representan el valor de x y las columnas las diferentes denominaciones de monedas restantes en mi conjunto S entonces pues
+Las ecuaciones funcionales obtenidas en base al ejemplo recursivo son:
+
+\begin{equation*}	  
+  Opt(x,n)\left\lbrace
+  \begin{array}{l}
+     1 \text{ Si } x = 0 \\
+     0 \text{ Si } n = 0 \text{ o  } x < 0 \\
+     Opt(x-S(n),n) + Opt(x,n-1) \text{ en otro caso} \\
+  \end{array}
+  \right.
+\end{equation*}
+
+El valor del elemento M[x,n] de la matriz depende de alguno de los elementos que se encuentran hacia arriba de x (parte superior de la columna) y el elemento a la izquierda de n (mismo renglón en la columna anterior).
+
+El algoritmo de programación dinámica queda entonces de la siguiente manera:
+
+\begin{algorithm}[H]
+	\caption{Formas de dar cambio con Prog. Danámica }
+	\begin{algorithmic}[1]
+	\State S = $\{1,5,10,25,50\}$ // los centavos
+	\State Cambio(x,S)
+	\State n = longitud(S)
+	\State Matriz [x+1][n+1] //Creo la matriz del tamaño x+1*n+1”
+	\For{i = 0 i, $<$= x, i=i+1}
+	\State Matriz [i,0] = 1
+	\EndFor
+	\For{i = 0, i $<$=n, i=i+1}
+	\State Matrix [0,i] = 0
+	\EndFor
+	\For{i=1, i $<$=x, i=i+1}
+	\For{j=1, j$<$=n, j=j+1}
+	\If{i-S[j] $>$= 0}	
+	\State Matriz[i,j] = Matriz[i-S[j]] + Matriz[i,j-1]
+	\Else
+	\State Matriz[i,j] = Matriz[i,j-1]
+	\EndIf	
+	\EndFor
+	\EndFor
+	\State
+	\Return Matrix[x,n]
+	\end{algorithmic}
+\end{algorithm}
+
+Análisis de complejidad
+
+Notesé que todas las operaciones son constantes O(1) pero hay un ciclo anidado dentro de otro así que para cada valor entre 1 y x se cicla entre 1 y n elementos que contenga S que es la cantidad de monedas de diferente denominación a utilizar así pues la complejidad es de O(xn).
+
+Análisis de correctez
+
+El algoritmo es correcto pues en todo momento el valor de la celda que se busca calcular tiene sus orígenes en una posición de la matriz que ya está calculada.
+
+\end{document} 	

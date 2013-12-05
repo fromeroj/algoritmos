@@ -1,0 +1,74 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 4} }
+      
+      \author{Israel Sandoval Grajeda y Fausto Salazar Mora}
+      \numberwithin{equation}{section}
+\begin{document}
+    \maketitle  
+%****************Formato de las secciones
+\titleformat{\section}[frame]
+{\normalfont}{\filright\Large
+\ Problema  }
+{6pt}{\bfseries\filright}
+%*****************************************
+
+\section*{Divide y vencerás}
+\subsection*{Algoritmo para la multiplicación de bits.}
+Para la ejecución del algoritmo presentado a continuación se deben realizar las siguientes consideraciones:
+\begin{enumerate}
+\item a y b son arreglos de bits
+\item Su longitud es $2^n$
+\end{enumerate}
+\begin{algorithm}[H]
+	\caption{Multiplicación de bits}
+	\begin{algorithmic}[1]
+	\State MultBits(a,b)
+	\State n=longitud(a)/2
+	\If{n==1}
+	\State return a*b
+	\EndIf a1=a[:n]
+	\State a2=a[n:]
+	\State b1=b[:n]
+	\State b2=b[n:]
+	\State z2=MultBits(a2,b2)
+	\State z0=MultBits(a1,b1)
+	\State z1=MultBits(a1+a2,b1+b2)-z2-z0
+	\State ShiftL(z2,n)
+	\State ShiftL(z1,n/2)
+	\State return z2+z1+z0
+	\end{algorithmic}
+\end{algorithm}
+
+Complejidad:
+
+En la función ShiftL hay un ciclo hasta n para hacer los corrimientos, las demás operaciones en esta función son constantes así pues el tiempo es lineal sobre el tamaño de n es decir O(n)
+
+En la recursión todas las operaciones son constantes y la recursión tiene la forma de 3 T(n/2) entonces la complejidad de la recursión es T(n) = 3 T(n/2) + O(n).
+Aplicando el método maestro tengo a=3 b=2 y f(n) = O(n) comparando f(n) con $n^{log_ba}$ cae en el caso 1 del método maestro y por lo tanto T(n) = O($n^{log_23}$)
+
+Correctez:
+
+El predicado siguiente indica que es correcto:\\
+En cada llamada recursiva de la función, el tamaño de las entradas disminuye a la mitad y al volver de la recursión siempre me regresa el resultado de multiplicar las entradas.
+\end{document} 	

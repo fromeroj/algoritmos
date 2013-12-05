@@ -1,0 +1,124 @@
+\documentclass[9pt,spanish]{article}
+      \usepackage[spanish,activeacute]{babel}
+      \usepackage{anysize}
+        %para tamaño carta, para otros eligieran la correcta
+	  \papersize{27.9cm}{21.5cm} 
+		%\marginsize{Izque}{Derec}{Arrib}{Abajo}	
+	  \marginsize{2.0cm}{2.0cm}{1.0cm}{1.0cm}
+	  \usepackage[utf8]{inputenc}
+      \usepackage{enumerate}
+      \usepackage{algpseudocode}
+      \usepackage{algorithm}
+	  %\usepackage{algorithmic}
+	  \usepackage{amsmath}
+	  \usepackage{titlesec}
+      \usepackage{dsfont}
+       \usepackage{tikz}
+	  \usetikzlibrary{automata,positioning}
+	  \usepackage[matrix,arrow]{xy}
+	  \usetikzlibrary{intersections}
+	  \usepackage{tcolorbox}
+      \parindent 0em
+      \parskip 1ex
+      \title{Algoritmos\\ \large{TAREA 4} }
+      
+      \author{Israel Sandoval Grajeda y Fausto Salazar Mora}
+      \numberwithin{equation}{section}
+\begin{document}
+    \maketitle  
+%****************Formato de las secciones
+\titleformat{\section}[frame]
+{\normalfont}{\filright\Large
+\ Problema  }
+{6pt}{\bfseries\filright}
+%*****************************************
+
+
+\section*{Problemas Programaci\'on din\'amica}
+\subsection*{Representaci\'on de un n\'umero n como suma de m enteros no negativos}
+
+Como en los ejercicios anteriores de programaci\'on din\'amica, se procede a realizar la versi\'on recursiva.
+
+\begin{algorithm}[H]
+	\caption{Calculo de numero de representaciones version recursiva}
+	\begin{algorithmic}[1]
+	\Require Numero $n$ a representar; cantidad $m$ de n\'umeros con los que se quiere representar a n con sumas
+	\Ensure Cantidad $r$ de posibles sumas de los $m$ n\'umeros para representar a $n$
+	\State sumas(n,m)
+	\If{n==1}
+	\State return m
+	\EndIf
+	\If{m==1}
+	\State return 1
+	\EndIf
+	\State r=sumas(n-1,m)+sumas(n,m-1)
+	\State return r
+	\end{algorithmic}
+\end{algorithm}
+
+El an\'alisis fue el siguiente:
+Cuando se tiene al 1 (n=1) este tiene m formas de ser representado, como en el ejemplo propuesto en el enunciado de la presente tarea.
+
+Cuando se tiene cualquier n\'umero y se requiere su representaci\'on usando un solo n\'umero, entonces \'el mismo es su representaci\'on y es \'unica.
+
+La observaci\'on mas importante se encuentra en la l\'inea 8 y es la siguiente: Para contar las representaciones se toman las que no incluyan a n con m numeros, y las que si lo incluyan pero con un elemento menos (porque ya se incluye n).
+
+
+La ecuaci\'on funcional asociada es:
+\begin{equation*}	  
+  Sumas(n,m)\left\lbrace
+  \begin{array}{l}
+     1 \text{ Si } m = 1 \\
+     m \text{ Si } n = 1 \\
+     sumas(n-1,m)+sumas(n,m-1) \text{en otro caso} \\
+  \end{array}
+  \right.
+\end{equation*}
+
+Se procede al algoritmo secuencial:
+
+\begin{algorithm}[H]
+	\caption{Calculo de numero de representaciones version Programaci\'on din\'amica}
+	\begin{algorithmic}[1]
+	\Require Numero $n$ a representar; cantidad $m$ de n\'umeros con los que se quiere representar a n con sumas
+	\Ensure Cantidad de posibles sumas de los $m$ n\'umeros para representar a $n$ y una matriz de $n \times m$ como memoria
+	\State sumas(n,m)
+	\For{r=1 hasta n-1}
+	\State mem[r][1]=1
+	\EndFor
+	\For{s=1 hasta m-1}
+	\State mem[1][s]=s
+	\EndFor
+	\For{j=1 hasta n-1}
+	\For{i=1 hasta m-1}
+	\State mem[i][j]=mem[i-1][j]+mem[i][j-1]
+	\EndFor	
+	\EndFor
+	\State return mem[m]][n]
+	\end{algorithmic}
+\end{algorithm}
+
+
+Análisis de complejidad
+
+El algoritmo contiene 3 ciclos For.
+\begin{enumerate}
+\item Lineas 2-4: tiene complejidad O(n)
+\item Lineas 5-7: tiene complejidad O(m)
+\item Lineas 8-12: Ya que dentro de un ciclo de 0 hasta n existe otro ciclo de 1 hasta m, el trozo de código completo tiene complejidad O(mn). 
+\end{enumerate}
+
+Por lo tanto, la complejidad del algoritmo completo es O(mn)
+
+Notesé que todas las operaciones son constantes O(1) pero hay ciclos anidados, el primero va de 1 a m el segundo de n a 0 y el tercero de 0 a lo que sea que lleve el segundo ciclo en términos generales esto quiere decir que tengo O(m * )
+
+Análisis de correctez
+
+Las lineas 2 a 4 cumplen con el primer criterio de la ecuaci\'on funcional; las lineas 5 a 7 con el segundo criterio y de la 8  a la 11 con el tercero.
+
+Se identific\'o que las soluciones para un elemento de la matriz proven\'ian \'unicamente de los lugares adyacentes izquierdo y superior, por lo que se realiz\'o un recorrido por renglones para asegurar los c\'alculos.
+
+El algoritmo es correcto pues en todo momento el valor de la celda que se busca calcular tiene sus orígenes en una posición de la matriz que ya está calculada en la columna anterior.
+
+
+\end{document} 	
